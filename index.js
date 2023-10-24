@@ -92,3 +92,9 @@ function analyzeFinances(data) {
   // Calculate the total number of months
   const totalMonths = data.length;
 
+  // Calculate the net total amount of profit/losses
+  let totalProfitLoss = 0;
+  for (const record of data) {
+    totalProfitLoss += record[1];
+  }
+
