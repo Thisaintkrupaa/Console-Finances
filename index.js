@@ -97,4 +97,25 @@ function analyzeFinances(data) {
   for (const record of data) {
     totalProfitLoss += record[1];
   }
+  
+// Calculate the total change and find the greatest increase and decrease
+  let totalChange = 0;
+  let greatestIncrease = { date: '', amount: 0 };
+  let greatestDecrease = { date: '', amount: 0 };
 
+  for (let i = 1; i < totalMonths; i++) {
+    const currentRecord = data[i];
+    const previousRecord = data[i - 1];
+    const change = currentRecord[1] - previousRecord[1];
+    totalChange += change;
+
+    if (change > greatestIncrease.amount) {
+      greatestIncrease.date = currentRecord[0];
+      greatestIncrease.amount = change;
+    }
+
+    if (change < greatestDecrease.amount) {
+      greatestDecrease.date = currentRecord[0];
+      greatestDecrease.amount = change;
+    }
+  }
