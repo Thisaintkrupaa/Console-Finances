@@ -87,52 +87,8 @@ var finances = [
   ['Feb-2017', 671099],
 ];
 
-
 // Function to analyze the financial data
 function analyzeFinances(data) {
   // Calculate the total number of months
   const totalMonths = data.length;
 
-  // Calculate the net total amount of profit/losses
-  let totalProfitLoss = 0;
-  for (const record of data) {
-    totalProfitLoss += record[1];
-  }
-
-  // Calculate the total change and find the greatest increase and decrease
-  let totalChange = 0;
-  let greatestIncrease = { date: '', amount: 0 };
-  let greatestDecrease = { date: '', amount: 0 };
-
-  for (let i = 1; i < totalMonths; i++) {
-    const currentRecord = data[i];
-    const previousRecord = data[i - 1];
-    const change = currentRecord[1] - previousRecord[1];
-    totalChange += change;
-
-    if (change > greatestIncrease.amount) {
-      greatestIncrease.date = currentRecord[0];
-      greatestIncrease.amount = change;
-    }
-
-    if (change < greatestDecrease.amount) {
-      greatestDecrease.date = currentRecord[0];
-      greatestDecrease.amount = change;
-    }
-  }
-
-  // Calculate the average change
-  const averageChange = totalChange / (totalMonths - 1);
-
-  // Print the analysis results to the console
-  console.log("Financial Analysis");
-  console.log("----------------");
-  console.log(`Total Months: ${totalMonths}`);
-  console.log(`Total: $${totalProfitLoss}`);
-  console.log(`Average Change: $${averageChange.toFixed(2)}`);
-  console.log(`Greatest Increase in Profits/Losses: ${greatestIncrease.date} ($${greatestIncrease.amount})`);
-  console.log(`Greatest Decrease in Profits/Losses: ${greatestDecrease.date} ($${greatestDecrease.amount})`);
-}
-
-// Call the analyzeFinances function with the provided dataset
-analyzeFinances(finances);
